@@ -1,6 +1,7 @@
 package be.intecbrussel.application;
 
 import be.intecbrussel.eatables.Cone;
+import be.intecbrussel.eatables.Eatable;
 import be.intecbrussel.eatables.IceRocket;
 import be.intecbrussel.eatables.Magnum;
 import be.intecbrussel.eatables.Cone.Flavor;
@@ -21,22 +22,34 @@ public class IceCreamAppV2 {
 		stock.setBalls(10);
 		stock.setMagni(10);
 		IceCreamSeller iceCreamSeller = new IceCreamCar(priceList, stock);
+		Flavor[] flavors = { Flavor.MOKKA, Flavor.PISTACHE };
+		Magnum alpinenutsMagnum = null;
+		Magnum blackChocolateMagnum = null;
+		IceRocket iceRocket = null;
+		IceRocket iceRocket2 = null;
+		IceRocket iceRocket3 = null;
+		Cone cone = null;
 
 		try {
-			Magnum alpinenutsMagnum = iceCreamSeller.orderMagnum(MagnumType.ALPINENUTS);
-			Magnum blackChocolateMagnum = iceCreamSeller.orderMagnum(MagnumType.BLACKCHOCOLATE);
-			IceRocket iceRocket = iceCreamSeller.orderIceRocket();
-			IceRocket iceRocket2 = iceCreamSeller.orderIceRocket();
-			//IceRocket iceRocket3 = iceCreamSeller.orderIceRocket();
-			
-			Flavor[] flavors = { Flavor.MOKKA, Flavor.PISTACHE };
-			Cone cone = iceCreamSeller.orderCone(flavors);
+			alpinenutsMagnum = iceCreamSeller.orderMagnum(MagnumType.ALPINENUTS);
+			blackChocolateMagnum = iceCreamSeller.orderMagnum(MagnumType.BLACKCHOCOLATE);
+			iceRocket = iceCreamSeller.orderIceRocket();
+			cone = iceCreamSeller.orderCone(flavors);
+			iceRocket2 = iceCreamSeller.orderIceRocket();
+			iceRocket3 = iceCreamSeller.orderIceRocket();
+
 		} catch (NoMoreIceCreamException nmice) {
 			System.out.println(nmice.getMessage());
 
 		}
+		// Call van eat()
+		System.out.println("iceRocket3" + iceRocket3);
+		Eatable[] iceList = { alpinenutsMagnum, blackChocolateMagnum, iceRocket, iceRocket2, iceRocket3, cone };
+		for (Eatable eatable : iceList) {
+			if (eatable != null)
+				eatable.eat();
+		}
 		System.out.println("The profit of this ice cream seller is: " + iceCreamSeller.getProfit() + " euro");
-
 
 	}
 

@@ -18,7 +18,6 @@ public class IceCreamCar implements IceCreamSeller {
 	}
 
 	@Override
-
 	public double getProfit() {
 		return this.profit;
 	}
@@ -26,38 +25,43 @@ public class IceCreamCar implements IceCreamSeller {
 	private Cone prepareCone(Flavor[] balls) throws NoMoreIceCreamException {
 		if (this.stock.getCones() < 0)
 			throw new NoMoreIceCreamException();
-		else
+		else {
+			this.profit += this.priceList.getBallPrice() * balls.length;
 			return new Cone(balls);
+		}
 	}
+
 	@Override
 	public Cone orderCone(Flavor[] balls) throws NoMoreIceCreamException {
-		
-		this.profit += this.priceList.getBallPrice() * balls.length;
 		return prepareCone(balls);
 	}
 
 	private IceRocket prepareRocket() throws NoMoreIceCreamException {
-		if (this.stock.getIceRockets() < 0)
+		if (this.stock.getIceRockets() < 0) {
+
 			throw new NoMoreIceCreamException();
-		else
+		} else {
+			this.profit += this.priceList.getRocketPrice();
 			return new IceRocket();
+		}
 	}
 
 	@Override
 	public IceRocket orderIceRocket() throws NoMoreIceCreamException {
-		this.profit += this.priceList.getRocketPrice();
 		return prepareRocket();
 	}
 
 	private Magnum prepareMagnum(MagnumType magnumType) throws NoMoreIceCreamException {
 		if (this.stock.getMagni() < 0)
 			throw new NoMoreIceCreamException();
-		else
+		else {
+			this.profit += this.priceList.getMagnumPrice(magnumType);
 			return new Magnum(magnumType);
+		}
 	}
+
 	@Override
 	public Magnum orderMagnum(MagnumType type) throws NoMoreIceCreamException {
-		this.profit += this.priceList.getMagnumPrice(type);
 		return prepareMagnum(type);
 	}
 

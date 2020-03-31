@@ -8,11 +8,12 @@ import be.intecbrussel.eatables.Magnum;
 import be.intecbrussel.eatables.Magnum.MagnumType;
 import be.intecbrussel.sellers.IceCreamSalon;
 import be.intecbrussel.sellers.IceCreamSeller;
+import be.intecbrussel.sellers.NoMoreIceCreamException;
 import be.intecbrussel.sellers.PriceList;
 
 public class IceCreamApp {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws NoMoreIceCreamException {
 		PriceList priceList = new PriceList(1, 2, 2);
 		IceCreamSeller iceCreamSeller = new IceCreamSalon(priceList);
 
